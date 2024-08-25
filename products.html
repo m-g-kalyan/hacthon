@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Listing with Cart, Details, Comments, and Redemption</title>
+    <link rel="stylesheet" href="products.css">
+    <style>
+        .active {
+            display: block;
+        }
+        .cart-container {
+            display: none;
+        }
+        .checkout-form {
+            display: none;
+        }
+        .modal {
+            display: none;
+        }
+        /* Add other necessary styles */
+    </style>
+</head>
+<body>
+    <nav class="navigation">
+        <a href="index.html" class="but">Home</a>
+        <a href="products.html" class="but">Products</a>
+        <a href="pricestruct.html" class="but">Price Structure</a>
+        <a href="redeem.html" class="but">Redeem</a>
+        <a href="about.html" class="but">About</a>
+        <a href="login.html" class="but">Login/Signup</a>
+        <a href="seller.html" class="but">Seller Dashboard</a>
+    </nav>
+
+    <header>
+        <h1>Available Products</h1>
+        <button class="show-cart-btn">Show Cart</button>
+    </header>
+
+    <div class="product-container">
+        <!-- Product Cards -->
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="2" data-product-name="Chair" data-product-price="399" data-product-description="Adjustable. There should be an adjustable strap such as laces or Velcro which allows for adjustment depending on an individual's needs.">
+            <img src="images/chair.jpg" alt="Chair" class="product-image">
+            <div class="product-info">
+                <h3>Chair</h3>
+                <p>₹399</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="3" data-product-name="Shoes" data-product-price="499" data-product-description="Comfortable shoes for daily use.">
+            <img src="images/shoes.jpeg" alt="Shoes" class="product-image">
+            <div class="product-info">
+                <h3>Shoes</h3>
+                <p>₹499</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card" data-product-id="1" data-product-name="Plastic Bowls" data-product-price="250" data-product-description="Set of 6 plastic bowls, perfect for everyday use.">
+            <img src="images/kitchenset.jpg" alt="Plastic Bowls" class="product-image">
+            <div class="product-info">
+                <h3>Plastic Bowls</h3>
+                <p>₹250</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+        <!-- Add more products as needed -->
+    </div>
+
+    <div class="cart-container" id="cart-container">
+        <h2>Your Cart</h2>
+        <ul id="cart-list"></ul>
+        <div class="cart-buttons">
+            <button class="buy-now-btn">Buy Now</button>
+            <button class="clear-cart-btn">Clear Cart</button>
+        </div>
+    </div>
+
+    <!-- Modal for Product Details -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modal-product-image" class="modal-product-image" alt="Product Image">
+            <h3 id="modal-product-name"></h3>
+            <p id="modal-product-description"></p>
+            <div class="modal-comments">
+                <h4>Comments</h4>
+                <div id="comments-list"></div>
+                <textarea id="new-comment" placeholder="Leave a comment..."></textarea>
+                <button class="btn submit-comment-btn">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="checkout-form">
+        <div class="checkout-form-content">
+            <span class="close-checkout">&times;</span>
+            <h2>Checkout</h2>
+            <table id="checkout-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="checkout-items"></tbody>
+                <tfoot>
+                    <tr class="total-row">
+                        <td colspan="2">Total</td>
+                        <td id="checkout-total">₹0</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="redeem-container">
+                <h3>Have a redeem code?</h3>
+                <input type="text" id="redeem-code-input" placeholder="Enter redeem code">
+                <button class="btn-redeem">Apply Code</button>
+                <p id="redeemed-display"></p>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let cart = [];
+        
+            // Get elements from the DOM
+            const cartContainer = document.getElementById('cart-container');
+            const cartList = document.getElementById('cart-list');
+            const checkoutForm = document.querySelector('.checkout-form');
+            const checkoutItems = document.getElementById('checkout-items');
+            const checkoutTotal = document.getElementById('checkout-total');
+            const showCartBtn = document.querySelector('.show-cart-btn');
+            const clearCartBtn = document.querySelector('.clear-cart-btn');
+            const buyNowBtn = document.querySelector('.buy-now-btn');
+            const productModal = document.getElementById('product-modal');
+            const modalClose = document.querySelector('.close');
+            const checkoutClose = document.querySelector('.close-checkout');
+            const submitCommentBtn = document.querySelector('.submit-comment-btn');
+        
+            // Show/Hide Cart Container
+            showCartBtn.addEventListener('click', () => {
+                cartContainer.classList.toggle('active');
+            });
+        
+            // Add product to cart
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productCard = e.target.closest('.product-card');
+                    const productId = productCard.getAttribute('data-product-id');
+                    const productName = productCard.getAttribute('data-product-name');
+                    const productPrice = parseInt(productCard.getAttribute('data-product-price'));
+        
+                    const existingProduct = cart.find(item => item.id === productId);
+                    if (existingProduct) {
+                        existingProduct.quantity++;
+                    } else {
+                        cart.push({ id: productId, name: productName, price: productPrice, quantity: 1 });
+                    }
+        
+                    updateCartDisplay();
+                });
+            });
+        
+            // Update cart display
+            function updateCartDisplay() {
+                cartList.innerHTML = '';
+                cart.forEach(item => {
+                    const cartItem = document.createElement('li');
+                    cartItem.innerHTML = `
+                        ${item.name} - ₹${item.price} x ${item.quantity}
+                        <button class="remove-item-btn" data-product-id="${item.id}">Remove</button>
+                    `;
+                    cartList.appendChild(cartItem);
+                });
+        
+                // Add event listeners for remove buttons
+                const removeItemButtons = document.querySelectorAll('.remove-item-btn');
+                removeItemButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = e.target.getAttribute('data-product-id');
+                        removeFromCart(productId);
+                    });
+                });
+            }
+        
+            // Remove product from cart
+            function removeFromCart(productId) {
+                cart = cart.filter(item => item.id !== productId);
+                updateCartDisplay();
+            }
+        
+            // Clear the cart
+            clearCartBtn.addEventListener('click', () => {
+                cart = [];
+                updateCartDisplay();
+            });
+        
+            // Show product details in modal
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const productId = card.getAttribute('data-product-id');
+                    const productName = card.getAttribute('data-product-name');
+                    const productDescription = card.getAttribute('data-product-description');
+                    const productImageSrc = card.querySelector('.product-image').getAttribute('src');
+        
+                    document.getElementById('modal-product-name').textContent = productName;
+                    document.getElementById('modal-product-description').textContent = productDescription;
+                    document.getElementById('modal-product-image').setAttribute('src', productImageSrc);
+        
+                    productModal.style.display = 'block';
+        
+                    loadComments(productId);
+                });
+            });
+        
+            // Close product modal
+            modalClose.addEventListener('click', () => {
+                productModal.style.display = 'none';
+            });
+        
+            // Load comments for the product
+            function loadComments(productId) {
+                const commentsList = document.getElementById('comments-list');
+                commentsList.innerHTML = '<p>No comments yet.</p>';
+            }
+        
+            // Submit a new comment
+            submitCommentBtn.addEventListener('click', () => {
+                const newCommentText = document.getElementById('new-comment').value;
+                if (newCommentText) {
+                    const commentsList = document.getElementById('comments-list');
+                    commentsList.innerHTML += `<div>${newCommentText}</div>`;
+                    document.getElementById('new-comment').value = '';
+                }
+            });
+        
+            // Checkout button - open checkout form
+            buyNowBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                displayCheckoutForm();
+            });
+        
+            // Display checkout form with cart details
+            function displayCheckoutForm() {
+                checkoutItems.innerHTML = '';
+                let totalAmount = 0;
+        
+                cart.forEach(item => {
+                    const checkoutRow = document.createElement('tr');
+                    checkoutRow.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>₹${item.price * item.quantity}</td>
+                    `;
+                    checkoutItems.appendChild(checkoutRow);
+                    totalAmount += item.price * item.quantity;
+                });
+        
+                checkoutTotal.textContent = `₹${totalAmount}`;
+                checkoutForm.style.display = 'block';
+            }
+        
+            // Close checkout form
+            checkoutClose.addEventListener('click', () => {
+                checkoutForm.style.display = 'none';
+            });
+        
+            // Apply redeem code as a discount in the checkout form
+            document.querySelector('.btn-redeem').addEventListener('click', () => {
+                const redeemCode = document.getElementById('redeem-code-input').value.trim();
+                const redeemedDisplay = document.getElementById('redeemed-display');
+        
+                // Retrieve the generated codes from local storage
+                const generatedCodes = JSON.parse(localStorage.getItem('generatedCodes')) || [];
+        
+                const matchingCodeEntry = generatedCodes.find(entry => entry.code === redeemCode);
+        
+                if (matchingCodeEntry) {
+                    let totalAmount = parseInt(checkoutTotal.textContent.replace('₹', ''));
+                    const discountAmount = matchingCodeEntry.coins / 100; // Convert coins to rupees
+                    totalAmount -= discountAmount;
+                    if (totalAmount < 0) totalAmount = 0; // Ensure total amount doesn't go negative
+        
+                    checkoutTotal.textContent = `₹${totalAmount.toFixed(2)}`;
+                    redeemedDisplay.textContent = `Redeem code applied: -₹${discountAmount.toFixed(2)}`;
+                    redeemedDisplay.style.color = 'green';
+        
+                    // Remove used code from generated codes
+                    const updatedGeneratedCodes = generatedCodes.filter(entry => entry.code !== redeemCode);
+                    localStorage.setItem('generatedCodes', JSON.stringify(updatedGeneratedCodes));
+                } else {
+                    redeemedDisplay.textContent = 'Invalid redeem code';
+                    redeemedDisplay.style.color = 'red';
+                }
+            });
+        
+            // Checkout process (mock functionality)
+            document.querySelector('.checkout-btn').addEventListener('click', () => {
+                alert('Checkout successful! Thank you for your purchase.');
+                cart = [];
+                updateCartDisplay();
+                checkoutForm.style.display = 'none';
+            });
+        });
+        
+    </script>
+</body>
+</html>
