@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste 2 Money - Redeem</title>
+    <link rel="stylesheet" href="reedeem.css">
+</head>
+<body>
+    <nav class="navigation">
+        <a href="page1.html" class="but">Home</a>
+        <a href="products.html" class="but">Products</a>
+        <a href="pricestruct.html" class="but">Price Structure</a>
+        <a href="redeem.html" class="but">Redeem</a> <!-- You are currently on the Redeem page -->
+        <a href="about.html" class="but">About</a>
+        
+    </nav>
+
+    <header>
+        <h1>Redeem Your Code</h1>
+    </header>
+
+    <div class="redeem-container">
+        <form id="redeem-form" onsubmit="redeemCode(event)">
+            <label for="redeem-code">Enter Your Code:</label>
+            <input type="text" id="redeem-code" placeholder="Enter code here" required>
+            <button type="submit" class="btn-redeem">Redeem</button>
+        </form>
+        <p id="redeem-message"></p>
+        <p id="coins-earned"></p>
+    </div>
+
+    <!-- Total redeemed coins display -->
+    <div id="redeemed-display">
+        <p>Total Coins Redeemed: <span id="total-coins">0</span> | Total Rupees: <span id="total-rupees">0</span></p>
+    </div>
+
+    <!-- Code Generation Section -->
+    <div class="generate-code-container">
+        <h2>Generate a New Code</h2>
+        <form id="generate-code-form" onsubmit="generateCode(event)">
+            <label for="amount">Enter Amount (in Rupees):</label>
+            <input type="number" id="amount" placeholder="Enter amount here" required>
+            <button type="submit" class="btn-generate">Generate Code</button>
+        </form>
+        <p id="generate-message"></p>
+        <p id="new-code"></p>
+    </div>
+
+    <script>
+        const COINS_PER_RUPEE = 10;
+
+        function redeemCode(event) {
+            event.preventDefault();
+
+            const code = document.getElementById('redeem-code').value;
+            const redeemMessage = document.getElementById('redeem-message');
+            const coinsEarned = document.getElementById('coins-earned');
+
+            // Fetch generated codes and redeemed data from local storage
+            const generatedCodes = JSON.parse(localStorage.getItem('generatedCodes')) || [];
+            const redeemedCodes = JSON.parse(localStorage.getItem('redeemedCodes')) || [];
+            const codeEntry = generatedCodes.find(entry => entry.code === code);
+
+            if (codeEntry) {
+                const coins = codeEntry.coins;
+                const rupees = coins / COINS_PER_RUPEE;
+                redeemMessage.innerText = "Code redeemed successfully!";
+                coinsEarned.innerText = `You've earned ${coins} coins (${rupees.toFixed(2)} Rupees).`;
+                redeemMessage.style.color = "green";
+
+                // Store redeemed code
+                redeemedCodes.push({ code: code, coins: coins });
+                localStorage.setItem('redeemedCodes', JSON.stringify(redeemedCodes));
+                
+                // Remove used code from generated codes (optional)
+                const updatedGeneratedCodes = generatedCodes.filter(entry => entry.code !== code);
+                localStorage.setItem('generatedCodes', JSON.stringify(updatedGeneratedCodes));
+
+                // Update total redeemed coins
+                updateTotalCoins();
+            } else {
+                redeemMessage.innerText = "Invalid code. Please try again.";
+                coinsEarned.innerText = "";
+                redeemMessage.style.color = "red";
+            }
+
+            // Clear the input field
+            document.getElementById('redeem-code').value = '';
+        }
+
+        function updateTotalCoins() {
+            const redeemedCodes = JSON.parse(localStorage.getItem('redeemedCodes')) || [];
+            const totalCoins = redeemedCodes.reduce((sum, entry) => sum + entry.coins, 0);
+            const totalRupees = totalCoins / COINS_PER_RUPEE;
+            document.getElementById('total-coins').innerText = totalCoins;
+            document.getElementById('total-rupees').innerText = totalRupees.toFixed(2);
+        }
+
+        function generateCode(event) {
+            event.preventDefault();
+
+            const amount = parseFloat(document.getElementById('amount').value);
+            const generateMessage = document.getElementById('generate-message');
+            const newCodeDisplay = document.getElementById('new-code');
+            const totalCoins = parseFloat(document.getElementById('total-coins').innerText);
+
+            // Calculate the required coins
+            const requiredCoins = amount * COINS_PER_RUPEE;
+
+            if (requiredCoins > totalCoins) {
+                generateMessage.innerText = "Insufficient balance to generate this code.";
+                generateMessage.style.color = "red";
+                newCodeDisplay.innerText = "";
+            } else {
+                // Deduct the coins and generate the code
+                const newTotalCoins = totalCoins - requiredCoins;
+                document.getElementById('total-coins').innerText = newTotalCoins;
+                document.getElementById('total-rupees').innerText = (newTotalCoins / COINS_PER_RUPEE).toFixed(2);
+
+                // Create a new code
+                const newCode = 'CODE' + Math.floor(Math.random() * 1000000);
+
+                // Save the new code to local storage
+                const generatedCodes = JSON.parse(localStorage.getItem('generatedCodes')) || [];
+                generatedCodes.push({ code: newCode, coins: requiredCoins });
+                localStorage.setItem('generatedCodes', JSON.stringify(generatedCodes));
+
+                generateMessage.innerText = "Code generated successfully!";
+                generateMessage.style.color = "green";
+                newCodeDisplay.innerText = `Your Code: ${newCode}`;
+            }
+
+            // Clear the input field
+            document.getElementById('amount').value = '';
+        }
+
+        // Initialize total coins display on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateTotalCoins();
+        });
+    </script>
+</body>
+</html>

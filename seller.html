@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard - Generate Codes</title>
+    <link rel="stylesheet" href="seller.css">
+</head>
+<body>
+    <header>
+        <h1>Buyer Dashboard</h1>
+        <h2>Generate Redeem Codes</h2>
+        <nav>
+            <a href="redeem.html">Go to Redeem Page</a>
+        </nav>
+    </header>
+
+    <div class="generate-code-container">
+        <form id="generate-code-form" onsubmit="generateCode(event)">
+            <label for="plastic-type">Select Plastic Type:</label>
+            <select id="plastic-type" required>
+                <option value="PET">Polyethylene Terephthalate (PET) - ₹20/kg</option>
+                <option value="HDPE">High-Density Polyethylene (HDPE) - ₹25/kg</option>
+                <option value="PVC">Polyvinyl Chloride (PVC) - ₹15/kg</option>
+                <option value="LDPE">Low-Density Polyethylene (LDPE) - ₹18/kg</option>
+                <option value="PP">Polypropylene (PP) - ₹22/kg</option>
+                <option value="PS">Polystyrene (PS) - ₹10/kg</option>
+                <option value="MIX">Mixed Plastics - ₹8/kg</option>
+            </select>
+
+            <label for="weight">Enter Weight (kg):</label>
+            <input type="number" id="weight" placeholder="Enter weight in kg" step="0.01" required>
+            
+            <button type="submit" class="btn-generate">Generate Code</button>
+        </form>
+        <p id="generated-code"></p>
+    </div>
+
+    <div class="code-list-container">
+        <h3>Generated Codes</h3>
+        <ul id="code-list"></ul>
+    </div>
+
+    <script>
+        const pricePerKg = {
+            PET: 20,
+            HDPE: 25,
+            PVC: 15,
+            LDPE: 18,
+            PP: 22,
+            PS: 10,
+            MIX: 8
+        };
+        const COINS_PER_RUPEE = 10;
+
+        let generatedCodes = JSON.parse(localStorage.getItem('generatedCodes')) || [];
+
+        function generateCode(event) {
+            event.preventDefault();
+            const plasticType = document.getElementById('plastic-type').value;
+            const weight = parseFloat(document.getElementById('weight').value);
+            const rupees = weight * pricePerKg[plasticType];
+            const coins = rupees * COINS_PER_RUPEE;
+            const generatedCode = `CODE${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+
+            generatedCodes.push({ code: generatedCode, coins: Math.round(coins), type: plasticType });
+
+            localStorage.setItem('generatedCodes', JSON.stringify(generatedCodes));
+
+            document.getElementById('generated-code').innerText = `Generated Code: ${generatedCode} for ${Math.round(coins)} coins`;
+
+            updateCodeList();
+            document.getElementById('weight').value = '';
+        }
+
+        function updateCodeList() {
+            const codeList = document.getElementById('code-list');
+            codeList.innerHTML = '';
+
+            generatedCodes.forEach((item) => {
+                const li = document.createElement('li');
+                li.innerText = `Type: ${item.type}, Code: ${item.code}, Coins: ${item.coins}`;
+                codeList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
